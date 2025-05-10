@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Globetrotter Challenge</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+
+        .section {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
+        h1, h2, h3 {
+            color: #2c3e50;
+            margin-top: 0;
+        }
+
+        .auth-form {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        input {
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        button {
+            padding: 10px 15px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        button:hover {
+            background-color: #2980b9;
+        }
+
+        #game-controls {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        #game-settings {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid #dee2e6;
+        }
+
+        .setting-group {
+            margin-bottom: 15px;
+        }
+
+        .setting-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+        }
+
+        .setting-group input {
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        #start-game-btn {
+            background-color: #28a745;
+            width: 100%;
+        }
+
+        #start-game-btn:hover {
+            background-color: #218838;
+        }
+
+        .challenge-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        #challenge-btn {
+            background-color: #ffc107;
+            color: #212529;
+        }
+
+        #accept-challenge-btn {
+            background-color: #17a2b8;
+        }
+
+        #logout-btn {
+            background-color: #dc3545;
+        }
+
+        #challenge-form {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid #dee2e6;
+            margin-top: 15px;
+        }
+
+        #challenge-info {
+            background-color: #e2f3f5;
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid #b8e0e5;
+            margin-top: 15px;
+        }
+
+        #game-play-area {
+            margin-top: 20px;
+        }
+
+        #game-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            padding: 10px;
+            background-color: #f0f0f0;
+            border-radius: 5px;
+        }
+
+        #timer {
+            font-size: 1.2em;
+            margin: 10px 0;
+            color: #e74c3c;
+        }
+
+        #options-container {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin: 20px 0;
+        }
+
+        .option-btn {
+            padding: 10px;
+            background-color: #ecf0f1;
+            border: 1px solid #bdc3c7;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .option-btn:hover {
+            background-color: #d6eaf8;
+        }
+
+        .option-btn.selected {
+            background-color: #3498db;
+            color: white;
+            border-color: #2980b9;
+        }
+
+        #answer-feedback {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 5px;
+        }
+
+        .correct {
+            background-color: #d5f5e3;
+        }
+
+        .incorrect {
+            background-color: #fadbd8;
+        }
+
+        #next-question-btn {
+            background-color: #28a745;
+            margin-right: 10px;
+        }
+
+        #end-game-btn {
+            background-color: #6c757d;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <!-- Auth Section -->
+        <div id="auth-section" class="section">
+            <h1>Globetrotter Challenge</h1>
+            <div id="auth-forms">
+                <div id="register-form" class="auth-form">
+                    <h2>Register</h2>
+                    <input type="text" id="register-username" placeholder="Username">
+                    <input type="password" id="register-password" placeholder="Password">
+                    <button onclick="register()">Register</button>
+                    <p>Already have an account? <a href="#" onclick="showLogin()">Login</a></p>
+                </div>
+                <div id="login-form" class="auth-form" style="display: none;">
+                    <h2>Login</h2>
+                    <input type="text" id="login-username" placeholder="Username">
+                    <input type="password" id="login-password" placeholder="Password">
+                    <button onclick="login()">Login</button>
+                    <p>Don't have an account? <a href="#" onclick="showRegister()">Register</a></p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Game Section -->
+        <div id="game-section" class="section" style="display: none;">
+            <div id="game-controls">
+                <div id="game-settings">
+                    <h3>Game Settings</h3>
+                    <div class="setting-group">
+                        <label for="total-questions-input">Number of Questions:</label>
+                        <input type="number" id="total-questions-input" min="1" max="20" value="5">
+                    </div>
+                    <div class="setting-group">
+                        <label for="time-per-question-input">Time per Question (seconds):</label>
+                        <input type="number" id="time-per-question-input" min="10" max="120" value="30">
+                    </div>
+                    <button id="start-game-btn" onclick="startGame()">Start Game</button>
+                </div>
+                
+                <div class="challenge-buttons">
+                    <button id="challenge-btn" onclick="showChallengeForm()">Challenge a Friend</button>
+                    <button id="accept-challenge-btn" onclick="acceptChallenge()">Accept Challenge</button>
+                </div>
+                
+                <button id="logout-btn" onclick="logout()">Logout</button>
+            </div>
+
+            <!-- Challenge Form -->
+            <div id="challenge-form" style="display: none;">
+                <h3>Challenge a Friend</h3>
+                <input type="text" id="friend-username" placeholder="Friend's username">
+                <div class="challenge-settings">
+                    <div class="setting-group">
+                        <label for="challenge-total-questions">Number of Questions:</label>
+                        <input type="number" id="challenge-total-questions" min="1" max="20" value="5">
+                    </div>
+                    <div class="setting-group">
+                        <label for="challenge-time-per-question">Time per Question (seconds):</label>
+                        <input type="number" id="challenge-time-per-question" min="10" max="120" value="30">
+                    </div>
+                </div>
+                <button onclick="createChallenge()">Send Challenge</button>
+                <button onclick="hideChallengeForm()">Cancel</button>
+            </div>
+
+            <!-- Challenge Info -->
+            <div id="challenge-info" style="display: none;">
+                <h3>Challenge Accepted</h3>
+                <p>Playing with: <span id="challenge-questions"></span> questions, <span id="challenge-time"></span> seconds per question</p>
+            </div>
+
+            <!-- Game Play Area -->
+            <div id="game-play-area" style="display: none;">
+                <div id="game-info">
+                    <p>Question: <span id="question-count">0</span>/<span id="total-questions">0</span></p>
+                    <p>Score: <span id="total-score">0</span></p>
+                    <p>Correct: <span id="correct-count">0</span> | Incorrect: <span id="incorrect-count">0</span></p>
+                </div>
+                <div id="timer">Time: <span id="time-left">0</span>s</div>
+                <div id="question-area">
+                    <h3 id="clue-text">Clue will appear here</h3>
+                    <button id="get-clue-btn" onclick="getClue()">Get Another Clue</button>
+                    <div id="options-container"></div>
+                    <button id="submit-answer-btn" onclick="submitAnswer()" disabled>Submit Answer</button>
+                </div>
+                <div id="answer-feedback" style="display: none;">
+                    <h2 id="feedback-title"></h2>
+                    <p id="fun-fact"></p>
+                    <p id="points-earned"></p>
+                    <button id="next-question-btn" onclick="nextQuestion()">Next Question</button>
+                    <button id="end-game-btn" onclick="endGame()">End Game</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <button id="view-history-btn" onclick="showGameHistory()">View My Game History</button>
+
+<div id="history-modal" class="modal" style="display: none;">
+    <div class="modal-content">
+        <span class="close" onclick="closeHistoryModal()">&times;</span>
+        <h2>Your Last 5 Games</h2>
+        <div id="history-results"></div>
+    </div>
+</div>
+
+    <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,273 @@
+body {
+    font-family: Arial, sans-serif;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f5f5f5;
+}
+
+.section {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+h1, h2, h3 {
+    color: #2c3e50;
+}
+
+.auth-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+input {
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+button {
+    padding: 10px 15px;
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #2980b9;
+}
+
+#options-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin: 20px 0;
+}
+
+.option-btn {
+    padding: 10px;
+    background-color: #ecf0f1;
+    border: 1px solid #bdc3c7;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.option-btn:hover {
+    background-color: #d6eaf8;
+}
+
+#timer {
+    font-size: 1.2em;
+    margin: 10px 0;
+    color: #e74c3c;
+}
+
+#answer-feedback {
+    margin-top: 20px;
+    padding: 15px;
+    border-radius: 5px;
+}
+
+.correct {
+    background-color: #d5f5e3;
+}
+
+.incorrect {
+    background-color: #fadbd8;
+}
+
+#game-info {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+    padding: 10px;
+    background-color: #f0f0f0;
+    border-radius: 5px;
+}
+/* Add these styles to your existing CSS */
+
+#game-settings {
+    background-color: #f8f9fa;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    border: 1px solid #dee2e6;
+}
+
+#game-settings h3 {
+    margin-top: 0;
+    color: #495057;
+    text-align: center;
+}
+
+.setting-group {
+    margin-bottom: 15px;
+}
+
+.setting-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 500;
+    color: #495057;
+}
+
+.setting-group input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.challenge-settings {
+    margin: 15px 0;
+}
+
+#game-controls {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+#start-game-btn {
+    background-color: #28a745;
+    margin-top: 10px;
+}
+
+#start-game-btn:hover {
+    background-color: #218838;
+}
+
+/* Challenge Buttons */
+.challenge-buttons {
+    display: flex;
+    gap: 10px;
+    margin: 15px 0;
+}
+
+#accept-challenge-btn {
+    background-color: #17a2b8;
+}
+
+#accept-challenge-btn:hover {
+    background-color: #138496;
+}
+
+#view-results-btn {
+    background-color: #6c757d;
+}
+
+#view-results-btn:hover {
+    background-color: #5a6268;
+}
+
+/* Challenge Info */
+#challenge-info {
+    background-color: #f8f9fa;
+    padding: 15px;
+    border-radius: 8px;
+    margin: 15px 0;
+    border: 1px solid #dee2e6;
+}
+
+/* Modal Styles */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.4);
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 500px;
+    border-radius: 8px;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close:hover {
+    color: black;
+}
+
+#results-content {
+    margin: 20px 0;
+    line-height: 1.6;
+}
+
+.modal {
+        display: none;
+        position: fixed;
+        z-index: 1;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgba(0,0,0,0.4);
+    }
+    
+    .modal-content {
+        background-color: #fefefe;
+        margin: 15% auto;
+        padding: 20px;
+        border: 1px solid #888;
+        width: 80%;
+        max-width: 600px;
+        border-radius: 8px;
+    }
+    
+    .close {
+        color: #aaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+        cursor: pointer;
+    }
+    
+    .close:hover {
+        color: black;
+    }
+    
+    .game-history-item {
+        padding: 10px;
+        margin-bottom: 10px;
+        border-radius: 5px;
+        background-color: #f8f9fa;
+        border: 1px solid #dee2e6;
+    }
+    
+    .game-history-item h4 {
+        margin-top: 0;
+        color: #2c3e50;
+    }
+    
+    #view-history-btn {
+        background-color: #6f42c1;
+        margin-top: 10px;
+    }
+    
+    #view-history-btn:hover {
+        background-color: #5a32a3;
+    }
